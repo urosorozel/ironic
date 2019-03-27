@@ -71,6 +71,7 @@ class TestPXEUtils(db_base.DbTestCase):
             'deployment_ari_path': 'http://1.2.3.4:1234/deploy_ramdisk',
             'aki_path': 'http://1.2.3.4:1234/kernel',
             'ari_path': 'http://1.2.3.4:1234/ramdisk',
+            'kernel_filename': 'deploy_kernel',
             'initrd_filename': 'deploy_ramdisk',
         })
 
@@ -104,6 +105,10 @@ class TestPXEUtils(db_base.DbTestCase):
             'password': 'fake_password',
         })
 
+        self.ipxe_options_boot_from_volume_no_extra_volume.pop(
+            'kernel_filename', None)
+        self.ipxe_options_boot_from_volume_extra_volume.pop(
+            'kernel_filename', None)
         self.ipxe_options_boot_from_volume_no_extra_volume.pop(
             'initrd_filename', None)
         self.ipxe_options_boot_from_volume_extra_volume.pop(
@@ -1433,6 +1438,7 @@ class PXEInterfacesTestCase(db_base.DbTestCase):
             'ipxe_timeout': ipxe_timeout_in_ms,
             'ari_path': ramdisk,
             'aki_path': kernel,
+            'kernel_filename': kernel_label,
             'initrd_filename': ramdisk_label,
         }
 
@@ -1454,6 +1460,7 @@ class PXEInterfacesTestCase(db_base.DbTestCase):
             })
             expected_options.pop('deployment_aki_path')
             expected_options.pop('deployment_ari_path')
+            expected_options.pop('kernel_filename')
             expected_options.pop('initrd_filename')
 
         with task_manager.acquire(self.context, self.node.uuid,

@@ -694,6 +694,7 @@ def build_deploy_pxe_options(task, pxe_info, mode='deploy',
             pxe_opts[option] = get_path_relative_to_tftp_root(
                 pxe_info[label][1])
     if ipxe_enabled:
+        pxe_opts['kernel_filename'] = kernel_label
         pxe_opts['initrd_filename'] = ramdisk_label
     return pxe_opts
 

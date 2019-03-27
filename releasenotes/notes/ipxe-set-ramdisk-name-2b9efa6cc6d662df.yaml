@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Fixes an issue with ipxe and UEFI when the ``ipxe_use_swift`` option
+    is enabled.
+    For more details see:
+    `story 2005250 <https://storyboard.openstack.org/#!/story/2005250>`
